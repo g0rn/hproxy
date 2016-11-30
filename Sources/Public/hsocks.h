@@ -1,10 +1,18 @@
 #ifndef HSOCKS_H
 #define HSOCKS_H
 
-#if defined(HSOCKS_EXPORT)
-#   define HSOCKS_API extern "C" __declspec(dllexport)
+#if defined WIN32
+#   if defined(HSOCKS_EXPORT)
+#      define HSOCKS_API __declspec(dllexport)
+#   else
+#      define HSOCKS_API __declspec(dllimport)
+#   endif
 #else
-#   define HSOCKS_API extern "C" __declspec(dllimport)
+#   define HSOCKS_API
+#endif
+
+#if defined __cplusplus
+extern "C" {
 #endif
 
 /**
@@ -24,5 +32,9 @@ struct hsocksVersionInfo
  */
 HSOCKS_API void hsocksGetVersion(struct hsocksVersionInfo* o_version_info);
 typedef void(hsocksGetVersionFunction)(struct hsocksVersionInfo*);
+
+#if __cplusplus
+}
+#endif
 
 #endif

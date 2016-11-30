@@ -6,8 +6,7 @@ set(HEADERS
     Public/hsocks.h
 )
 
-add_library(hsockslib SHARED ${HEADERS} ${SOURCES})
-set_property(TARGET hsockslib PROPERTY FOLDER "Sources")
+_create_library(hsockslib "${SOURCES}" "${HEADERS}" "Sources")
 
 foreach(HEADER ${HEADERS})
     if (${HEADER} MATCHES "^Public/.+\\.h$")

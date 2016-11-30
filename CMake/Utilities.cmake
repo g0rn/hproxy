@@ -1,0 +1,16 @@
+function(_group_sources SRC_LIST)
+    foreach(SOURCE "${SRC_LIST}")
+        get_filename_component(SOURCE_DIRECTORY "${SOURCE}" DIRECTORY)
+        string(REPLACE "/" "\\" CONVERTED_PATH "${SOURCE_DIRECTORY}")
+        set(CONVERTED_PATH "Sources\\${CONVERTED_PATH}")
+        source_group("${CONVERTED_PATH}" "${SOURCE}")
+    endforeach()
+endfunction()
+
+function(_create_library TARGET_NAME SRC_LIST HEADERS_LIST PROJECT_FILTER)
+    add_library("${TARGET_NAME}" SHARED "${SRC_LIST}" "${HEADERS_LIST}")
+    set_property(TARGET "${TARGET_NAME}" PROPERTY FOLDER "${PROJECT_FILTER}")
+
+    _group_sources("${SRC_LIST}")
+    _group_sources("${HEADERS_LIST}")
+endfunction()

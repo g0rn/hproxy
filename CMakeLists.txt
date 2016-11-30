@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
-project(hsockslib)
+project(hsockslib CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS "ON")
 set(CMAKE_DEBUG_POSTFIX "d")
@@ -13,5 +13,7 @@ add_definitions(-DMAJOR_VERSION=0
 
 include_directories("Sources")
 include_directories("Sources/Public")
+
+include("CMake/Utilities.cmake")
 
 add_subdirectory(Sources)
